@@ -76,8 +76,11 @@ exports.updateSection = async (req, res) => {
 // DELETE a section
 exports.deleteSection = async (req, res) => {
 	try {
-		const { sectionId } = req.params;
+		// HW : fetch with req.params
+		const { sectionId, courseId } = req.body;
 		await Section.findByIdAndDelete(sectionId);
+		// HW >>
+		// TODO : Course ko bhi update karo
 		res.status(200).json({
 			success: true,
 			message: "Section deleted",
