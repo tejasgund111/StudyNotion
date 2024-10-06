@@ -6,10 +6,10 @@ import CourseCard from './CourseCard'
 
 const tabsName = [
     "Free",
-    "New To Coding",
-    "Most Popular",
-    "Skill Paths",
-    "Career Paths"
+    "New to coding",
+    "Most popular",
+    "Skills paths",
+    "Career paths"
 ]
 
 const ExploreMore = () => {
