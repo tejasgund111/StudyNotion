@@ -43,7 +43,7 @@ function ForgotPassword() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter email address"
-                  className="form-style w-full"
+                  className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-12 text-richblack-5"
                 />
               </label>
             )}
