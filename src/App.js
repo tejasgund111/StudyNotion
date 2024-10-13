@@ -11,7 +11,10 @@ import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-
+import MyProfile from "./components/core/Dashboard/MyProfile";
+import Dashboard from "./pages/Dashboard"
+import PrivateRoute from "./components/core/Auth/PrivateRoute";
+import Error from "./pages/Error"
 
 function App() {
   return (
@@ -19,6 +22,11 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+
+        <Route path="about" element={<About />} />
+
+        <Route path="contact" element={<Contact />} />
+
         <Route
           path="signup"
           element={
@@ -27,6 +35,7 @@ function App() {
             </OpenRoute>
           }
         />
+
         <Route
           path="login"
           element={
@@ -64,23 +73,19 @@ function App() {
         />
 
         <Route
-          path="about"
           element={
-            <OpenRoute>
-              <About />
-            </OpenRoute>
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
           }
-        />
+        >
 
-        <Route
-          path="contact"
-          element={
-            <OpenRoute>
-              <Contact />
-            </OpenRoute>
-          }
-        />
+          {/* Route for all users */}
+          <Route path="dashboard/my-profile" element={<MyProfile />} />
+        </Route>
 
+
+        <Route path="*" element={<Error />} />
 
 
       </Routes>
