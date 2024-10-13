@@ -118,6 +118,7 @@ export function login(email, password, navigate) {
 }
 
 export function logout(navigate) {
+  console.log("inside logout");
   return (dispatch) => {
     dispatch(setToken(null))
     dispatch(setUser(null))
