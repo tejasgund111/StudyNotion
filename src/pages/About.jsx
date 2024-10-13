@@ -22,9 +22,9 @@ const About = () => {
                 <p>Studynotion is at the forefront of driving innovation in online education. We're passionate about creating a brighter future by offering cutting-edge courses, leveraging emerging technologies, and nurturing a vibrant learning community.</p>
             </header>
             <div className='flex gap-x-3 mx-auto'>
-                <img src={BannerImage1} />
-                <img src={BannerImage2} />
-                <img src={BannerImage3} />
+                <img src={BannerImage1} alt='img' />
+                <img src={BannerImage2} alt='img' />
+                <img src={BannerImage3} alt='img' />
             </div>
         </div>
       </section>
@@ -54,7 +54,7 @@ const About = () => {
                 </div>
                 {/* foudning story right box */}
                 <div>
-                    <img  src={FoundingStory} />
+                    <img  src={FoundingStory} alt='img' />
                 </div>
             </div>
 
