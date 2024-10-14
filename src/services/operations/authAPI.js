@@ -118,7 +118,6 @@ export function login(email, password, navigate) {
 }
 
 export function logout(navigate) {
-  console.log("inside logout");
   return (dispatch) => {
     dispatch(setToken(null))
     dispatch(setUser(null))
@@ -132,22 +131,22 @@ export function logout(navigate) {
 
 
 
-export function getPasswordResetToken(email , setEmailSent) {
-  return async(dispatch) => {
+export function getPasswordResetToken(email, setEmailSent) {
+  return async (dispatch) => {
     dispatch(setLoading(true));
-    try{
-      const response = await apiConnector("POST", RESETPASSTOKEN_API, {email,})
+    try {
+      const response = await apiConnector("POST", RESETPASSTOKEN_API, { email, })
 
       console.log("RESET PASSWORD TOKEN RESPONSE....", response);
 
-      if(!response.data.success) {
+      if (!response.data.success) {
         throw new Error(response.data.message);
       }
 
       toast.success("Reset Email Sent");
       setEmailSent(true);
     }
-    catch(error) {
+    catch (error) {
       console.log("RESET PASSWORD TOKEN Error", error);
       toast.error("Failed to send email for resetting password");
     }
@@ -156,21 +155,21 @@ export function getPasswordResetToken(email , setEmailSent) {
 }
 
 export function resetPassword(password, confirmPassword, token) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch(setLoading(true));
-    try{
-      const response = await apiConnector("POST", RESETPASSWORD_API, {password, confirmPassword, token});
+    try {
+      const response = await apiConnector("POST", RESETPASSWORD_API, { password, confirmPassword, token });
 
       console.log("RESET Password RESPONSE ... ", response);
 
 
-      if(!response.data.success) {
+      if (!response.data.success) {
         throw new Error(response.data.message);
       }
 
       toast.success("Password has been reset successfully");
     }
-    catch(error) {
+    catch (error) {
       console.log("RESET PASSWORD TOKEN Error", error);
       toast.error("Unable to reset password");
     }
