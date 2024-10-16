@@ -83,10 +83,10 @@ export default function CourseInformationForm() {
         // console.log(data)
 
         if (editCourse) {
-            // const currentValues = getValues()
-            // console.log("changes afer editing form values:", currentValues)
-            // console.log("now course:", course)
-            // console.log("Has Form Changed:", isFormUpdated())
+            const currentValues = getValues()
+            console.log("changes afer editing form values:", currentValues)
+            console.log("now course:", course)
+            console.log("Has Form Changed:", isFormUpdated())
             if (isFormUpdated()) {
                 const currentValues = getValues()
                 const formData = new FormData()
@@ -101,7 +101,7 @@ export default function CourseInformationForm() {
                 if (currentValues.coursePrice !== course.price) {
                     formData.append("price", data.coursePrice)
                 }
-                if (currentValues.courseTag.toString() !== course.tag.toString()) {
+                if (currentValues.courseTags.toString() !== course.tag.toString()) {
                     formData.append("tag", JSON.stringify(data.courseTags))
                 }
                 if (currentValues.courseCategory._id !== course.category._id) {
@@ -115,7 +115,10 @@ export default function CourseInformationForm() {
                 }
                 // console.log("Edit Form data: ", formData)
                 setLoading(false)
+
+                console.log("result before");
                 const result = await editCourseDetails(formData, token)
+                console.log("result after",result);
                 if (result) {
                     dispatch(setStep(2))
                     dispatch(setCourse(result))
