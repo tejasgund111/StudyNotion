@@ -100,7 +100,7 @@ exports.createCourse = async (req, res) => {
 			{ _id: category },
 			{
 				$push: {
-					course: newCourse._id,
+					courses: newCourse._id,
 				},
 			},
 			{ new: true }
@@ -233,7 +233,7 @@ exports.getCourseDetails = async (req, res) => {
 					populate: {
 						path: "additionalDetails",
 					},
-				}
+				} 
 			)
 			.populate("category")
 			.populate("ratingAndReviews")
