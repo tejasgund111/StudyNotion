@@ -323,7 +323,7 @@ export const getFullDetailsOfCourse = async(courseId, token) => {
     let result = null
     try {
         const response = await apiConnector(
-            "GET", 
+            "POST", 
             GET_FULL_COURSE_DETAILS_AUTHENTICATED, 
             {
                 courseId, 
@@ -333,6 +333,7 @@ export const getFullDetailsOfCourse = async(courseId, token) => {
             }
         )
         console.log("COURSE_FULL_DETAILS_API API RESPONSE................", response)
+        result = response?.data?.data;
 
         if(!response?.data?.success) {
             throw new Error(response.data.message)
