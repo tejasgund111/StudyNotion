@@ -4,6 +4,9 @@ const User = require("../models/User");
 const Section = require("../models/Section");
 const SubSection = require("../models/SubSection");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const { convertSecondsToDuration } = require("../utils/secToDuration");
+
+
 // Function to create a new course
 exports.createCourse = async (req, res) => {
 	try {
@@ -306,34 +309,33 @@ exports.getFullCourseDetails = async (req, res) => {
 		})
 	  }
   
-	  // if (courseDetails.status === "Draft") {
-	  //   return res.status(403).json({
-	  //     success: false,
-	  //     message: `Accessing a draft course is forbidden`,
-	  //   });
-	  // }
+	  if (courseDetails.status === "Draft") {
+	    return res.status(403).json({
+	      success: false,
+	      message: `Accessing a draft course is forbidden`,
+	    });
+	  }
   
-	//   let totalDurationInSeconds = 0
-	//   courseDetails.courseContent.forEach((content) => {
-	// 	content.subSection.forEach((subSection) => {
-	// 	  const timeDurationInSeconds = parseInt(subSection.timeDuration)
-	// 	  totalDurationInSeconds += timeDurationInSeconds
-	// 	})
-	//   })
+	  let totalDurationInSeconds = 0
+	  courseDetails.courseContent.forEach((content) => {
+		content.subSection.forEach((subSection) => {
+		  const timeDurationInSeconds = parseInt(subSection.timeDuration)
+		  totalDurationInSeconds += timeDurationInSeconds
+		})
+	  })
   
-	//   const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+	  const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
   
 	  return res.status(200).json({
 		success: true,
-		data : courseDetails,
 		message : "course details fetched successfully",
-		// data: {
-		//   courseDetails,
-		//   totalDuration,
+		data: {
+		  courseDetails,
+		  totalDuration,
 		//   completedVideos: courseProgressCount?.completedVideos
 		// 	? courseProgressCount?.completedVideos
 		// 	: [],
-		// },
+		},
 	  })
 	} catch (error) {
 	  return res.status(500).json({
