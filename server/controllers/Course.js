@@ -5,7 +5,7 @@ const Section = require("../models/Section");
 const SubSection = require("../models/SubSection");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
-
+const CourseProgress = require("../models/CourseProgress");
 
 // Function to create a new course
 exports.createCourse = async (req, res) => {
@@ -275,7 +275,7 @@ exports.getCourseDetails = async (req, res) => {
 exports.getFullCourseDetails = async (req, res) => {
 	try {
 	  const { courseId } = req.body ;
-	//   const userId = req.user.id
+	  const userId = req.user.id
 	  const courseDetails = await Course.findOne({
 		_id: courseId,
 	  })
@@ -295,10 +295,10 @@ exports.getFullCourseDetails = async (req, res) => {
 		})
 		.exec()
   
-	//   let courseProgressCount = await CourseProgress.findOne({
-	// 	courseID: courseId,
-	// 	userId: userId,
-	//   })
+	  let courseProgressCount = await CourseProgress.findOne({
+		courseID: courseId,
+		userId: userId,
+	  })
   
 	//   console.log("courseProgressCount : ", courseProgressCount)
   
@@ -332,9 +332,9 @@ exports.getFullCourseDetails = async (req, res) => {
 		data: {
 		  courseDetails,
 		  totalDuration,
-		//   completedVideos: courseProgressCount?.completedVideos
-		// 	? courseProgressCount?.completedVideos
-		// 	: [],
+		  completedVideos: courseProgressCount?.completedVideos
+			? courseProgressCount?.completedVideos
+			: [],
 		},
 	  })
 	} catch (error) {
