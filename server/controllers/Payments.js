@@ -1,6 +1,7 @@
 const {instance} = require("../config/razorpay");
 const Course = require("../models/Course");
 const User = require("../models/User");
+const CourseProgress = require("../models/CourseProgress");
 const mailSender = require("../utils/mailSender");
 const {courseEnrollmentEmail} = require("../mail/templates/courseEnrollmentEmail");
 const { default: mongoose } = require("mongoose");
@@ -103,7 +104,7 @@ const enrollStudents = async (courses, userId, res) => {
         return res.status(400).json({success : false, message : "Please provide data for courses or userId"});
     }
     
-    for(const courseId of courses){
+    for(const courseId of Object.values(courses)){
         try{
             // find the course and enroll the student in it
         const enrolledCourse = await Course.findOneAndUpdate(
@@ -115,11 +116,19 @@ const enrollStudents = async (courses, userId, res) => {
         if(!enrolledCourse){
             return res.status(500).json({success : false, message : "Course not found"})
         }
+
+        const courseProgress = await CourseProgress.create({
+            courseId : courseId,
+            userId : userId,
+            completedVideos : [],
+        });
+        
         // find the student and add the course to their list of enrolledCourses
         const enrolledStudent = await User.findByIdAndUpdate(userId,
             {
                 $push : {
-                    courses : courseId
+                    courses : courseId,
+                    courseProgress : courseProgress._id,
                 }
             }, {new : true}
         );
