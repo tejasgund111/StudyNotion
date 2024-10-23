@@ -153,8 +153,8 @@ const VideoDetails = () => {
 
   const handleLectureCompletion = async () => {
     setLoading(true);
-    const res = await markLectureAsComplete({ courseId: courseId, subsectionId: subSectionId }, token);
-
+    const res = await markLectureAsComplete({ courseId: courseId, subSectionId: subSectionId }, token);
+    // console.log("res >> ", res);
     if (res) {
       dispatch(updateCompletedLectures(subSectionId));
     }
