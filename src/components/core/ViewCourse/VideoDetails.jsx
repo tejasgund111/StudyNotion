@@ -47,6 +47,7 @@ const VideoDetails = () => {
     })()
   }, [courseSectionData, courseEntireData, location.pathname])
 
+
   // check if the lecture is the first video of the course
   const isFirstVideo = () => {
     const currentSectionIndx = courseSectionData.findIndex(

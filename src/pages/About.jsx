@@ -9,6 +9,7 @@ import StatsComponent from '../components/core/AboutPage/Stats'
 import LearningGrid from '../components/core/AboutPage/LearningGrid'
 import ContactFormSection from '../components/core/AboutPage/ContactFormSection'
 import Footer from '../components/common/Footer'
+import ReviewSlider from '../components/common/ReviewSlider'
 
 const About = () => {
   return (
@@ -108,6 +109,7 @@ const About = () => {
             <div className="text-white">
                 <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
                     {/* Do more with div */}
+                    <ReviewSlider />
                 </div>
             </div>
         </div>

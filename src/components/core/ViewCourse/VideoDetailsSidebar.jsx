@@ -20,21 +20,24 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
     } = useSelector((state) => state.viewCourse);
 
     useEffect(() => {
-        if (!courseSectionData.length) 
-            return;
+        ; (async () => {
+            if (!courseSectionData.length)
+                return;
 
-        const currentSectionIndx = courseSectionData.findIndex(
-            (data) => data._id === sectionId
-        );
-        const currentSubSectionIndx = courseSectionData?.[currentSectionIndx]?.subSection.findIndex(
-            (data) => data._id === subSectionId
-        );
+            const currentSectionIndx = courseSectionData.findIndex(
+                (data) => data._id === sectionId
+            );
+            const currentSubSectionIndx = courseSectionData?.[currentSectionIndx]?.subSection.findIndex(
+                (data) => data._id === subSectionId
+            );
 
-        const activeSubSectionId = courseSectionData[currentSectionIndx]?.subSection?.[currentSubSectionIndx]?._id;
+            const activeSubSectionId = courseSectionData[currentSectionIndx]?.subSection?.[currentSubSectionIndx]?._id;
 
-        setActiveStatus(courseSectionData?.[currentSectionIndx]?._id);
-        setVideoBarActive(activeSubSectionId);
-    }, [courseSectionData, location.pathname])
+            setActiveStatus(courseSectionData?.[currentSectionIndx]?._id);
+            setVideoBarActive(activeSubSectionId);
+        })()
+    }, [courseSectionData, courseEntireData, location.pathname])
+
 
     const handleSectionClick = (id) => {
         // Toggle the section: if already active, collapse it
@@ -97,8 +100,8 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                                 {course.subSection.map((topic, i) => (
                                     <div
                                         className={`flex gap-3 px-5 py-2 ${videoBarActive === topic._id
-                                                ? "bg-yellow-200 font-semibold text-richblack-800"
-                                                : "hover:bg-richblack-900"
+                                            ? "bg-yellow-200 font-semibold text-richblack-800"
+                                            : "hover:bg-richblack-900"
                                             }`}
                                         key={i}
                                         onClick={() => {
