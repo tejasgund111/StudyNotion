@@ -7,7 +7,7 @@
 
 <br>
 
-![s1](https://github.com/Muskansahuincredible/StudyNotion-An-Online-Education-Platform/assets/133582566/749ced9e-269c-4ab4-aae5-f7ba098da825)
+![s1](https://study-notion-app-three.vercel.app/)
 
 
 </div>
